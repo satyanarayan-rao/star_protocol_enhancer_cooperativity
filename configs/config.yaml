@@ -1,0 +1,11 @@
+sample_metadata: "data_from_geo/samples.tsv"
+bam_merge_config:
+    S2:
+        - "bismark_mapped/S2_tandem_R1_1_pe_sorted.bam"
+        - "bismark_mapped/S2_tandem_R1_2_pe_sorted.bam"
+        - "bismark_mapped/S2_tandem_R2_1_pe_sorted.bam"
+        - "bismark_mapped/S2_tandem_R2_2_pe_sorted.bam"
+process_footprints:
+    wobble_1_min_fp_10:
+        wobble_gap: 1 
+        min_fp_len: 10 

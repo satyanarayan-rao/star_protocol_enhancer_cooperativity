@@ -1,0 +1,5 @@
+sample	paired_read_1_path	paired_read_2_path
+S2_tandem_R1_1	data_from_geo/SRR3133326_1.fastq.gz	data_from_geo/SRR3133326_2.fastq.gz
+S2_tandem_R1_2	data_from_geo/SRR3133327_1.fastq.gz	data_from_geo/SRR3133327_2.fastq.gz
+S2_tandem_R2_1	data_from_geo/SRR3133328_1.fastq.gz	data_from_geo/SRR3133328_2.fastq.gz
+S2_tandem_R2_2	data_from_geo/SRR3133329_1.fastq.gz	data_from_geo/SRR3133329_2.fastq.gz
