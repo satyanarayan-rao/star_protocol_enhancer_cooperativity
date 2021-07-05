@@ -1,0 +1,13 @@
+{
+    "__default__" :
+    {
+        "queue"     : "rna",
+        "nCPUs"     : "1",
+        "memory"    : 32,
+        "resources" : "\"select[mem>32] rusage[mem=32] span[hosts=1]\"",
+        "name"      : "JOBNAME.{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+    }
+     
+}
