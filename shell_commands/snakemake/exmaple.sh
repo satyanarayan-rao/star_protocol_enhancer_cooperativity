@@ -1,0 +1,1 @@
+snakemake --dag  -np --snakefile cooperative_binding_analysis.smk plots/single_binding/suppressed_merged_S2_to_example_spanning_lf_15_rf_15_extended_left_150_right_150_roi_peak_229.fp.pdf --configfile configs/config.yaml | dot -Tpng > workflow_figures/workflow_for_peak229.png

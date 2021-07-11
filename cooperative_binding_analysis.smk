@@ -19,6 +19,7 @@ include: "snakemakes/define_footprints_and_fix_gaps.smk"
 include: "snakemakes/footprint_matix.smk" 
 include: "snakemakes/assign_binding_states.smk"
 include: "snakemakes/plot_binding_states.smk"
+include: "snakemakes/plot_occupancies_using_binding_states.smk"
 
 rule fastqc:
     input:
