@@ -20,6 +20,11 @@ include: "snakemakes/footprint_matix.smk"
 include: "snakemakes/assign_binding_states.smk"
 include: "snakemakes/plot_binding_states.smk"
 include: "snakemakes/plot_occupancies_using_binding_states.smk"
+include: "snakemakes/plot_percentage_methylation.smk"
+############ snakemakes for co-binding analysis ############## 
+
+include: "snakemakes/generate_peak_pairs_in_open_enhancer.smk"
+#include: "snakemakes/prepare_data_for_cooperative_binding.smk"
 
 rule fastqc:
     input:
