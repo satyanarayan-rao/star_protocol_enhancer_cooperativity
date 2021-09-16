@@ -1,0 +1,14 @@
+set tmargin 0
+set bmargin at screen 0.2
+set lmargin 3
+#set palette defined (0 "white", 0.499 "white", 0.5 "#f0f0f0", 0.99 "#f0f0f0", 1 "#3182bd")
+
+#set palette defined ( 0 "white", 0.3299 "white", 0.33333 "#f0f0f0", 0.6599 "#f0f0f0", 0.6666 "#969696", 0.99 "#969696", 1 "#252525")
+set palette defined ( 0 "white", 0.3299 "white", 0.33333 "#f0f0f0", 0.6599 "#f0f0f0", 0.6666 "#636363", 0.99 "#636363", 1 "#de2d26")
+set xtics nomirror
+set tics scale 0 font ",12"
+unset ytics
+
+# ----------------------------- # 
+
+
