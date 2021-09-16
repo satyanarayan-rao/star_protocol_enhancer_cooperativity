@@ -24,6 +24,8 @@ include: "snakemakes/plot_percentage_methylation.smk"
 ############ snakemakes for co-binding analysis ############## 
 
 include: "snakemakes/generate_peak_pairs_in_open_enhancer.smk"
+include: "snakemakes/assign_cobinding_states.smk"
+include: "snakemakes/plot_cobinding_states.smk"
 #include: "snakemakes/prepare_data_for_cooperative_binding.smk"
 
 rule fastqc:

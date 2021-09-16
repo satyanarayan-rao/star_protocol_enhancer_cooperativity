@@ -1,15 +1,29 @@
 rule get_peak_pairs:
     input:
-        mnase_peaks = "input_bed/mnase_peaks_in_open_and_closed_enhancers.bed", 
-        mapped_dsmf = "fragments_spanning_flanks/suppressed_merged_S2_to_mnase_peaks_in_open_and_closed_enhancers_spanning_lf_15_rf_15.bed.gz", 
+        mnase_peaks = "input_bed/{bed}.bed", 
+        mapped_dsmf = "fragments_spanning_flanks/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}.bed.gz", 
         genome_size_file = "metadata/dm3.chrom.sizes"
     params:
         distance_th = 30,
         flank_from_peak = 15
     output:
-        mnase_peak_pairs = "input_bed/mnase_peak_pairs_in_open_enhancers.bed"
+        mnase_peak_pairs = "region_for_cobinding_analysis/{sample}_to_{bed}_lf_{lf}_rf_{rf}_pairs_for_cobinding.bed", 
+        mapped_dsmf_reads_to_pairs = "dsmf_reads_to_peak_pairs/{sample}_to_{bed}_lf_{lf}_rf_{rf}_dsmf_pairs.bed.gz"
     shell: 
-        "sh scripts/generated_mnase_peak_pairs.sh {input.mnase_peaks}"
+        "sh scripts/generate_mnase_peak_pairs.sh {input.mnase_peaks}"
         " {input.mapped_dsmf} {input.genome_size_file} {params.distance_th} {params.flank_from_peak}"
-        " {output.mnase_peak_pairs}"
+        " {output.mnase_peak_pairs} {output.mapped_dsmf_reads_to_pairs}"
 
+rule extend_dsmf_reads_for_cobinding_analysis:
+    input:
+        mapped_dsmf_reads_to_pairs = "dsmf_reads_to_peak_pairs/{sample}_to_{bed}_lf_{lf}_rf_{rf}_dsmf_pairs.bed.gz",
+        footprint_dict = "fragments_spanning_flanks/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}.pkl",
+        regions_metadata = "regions_metadata/{bed}.pkl"
+    output:
+        extended_fragments = "extended_dsmf_reads_to_peak_pairs/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}.bed.gz", 
+        verbose = "extended_dsmf_reads_to_peak_pairs/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_verbose.bed.gz", 
+    shell:
+        "sh scripts/extend_fragments_for_cobinding.sh {input.mapped_dsmf_reads_to_pairs}"
+        " {input.footprint_dict} {input.regions_metadata} {wildcards.lf}"
+        " {wildcards.rf} {wildcards.lextend} {wildcards.rextend}"
+        " {output.extended_fragments} {output.verbose}" 

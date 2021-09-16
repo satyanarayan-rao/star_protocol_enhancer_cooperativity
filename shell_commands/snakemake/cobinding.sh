@@ -1,0 +1,1 @@
+snakemake  --snakefile cooperative_binding_analysis.smk plots/cobinding/suppressed_merged_S2_to_mnase_peaks_in_open_and_closed_enhancers_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4@peak_110_6.fp.pdf --configfile configs/config.yaml -j4 
