@@ -24,4 +24,6 @@ $ sh shell_commands/snakemake/exmaple.sh
 ```
 
 ## To reproduce figure 6C
-
+```
+$ sh shell_commands/snakemake/cobinding.sh 
+```
