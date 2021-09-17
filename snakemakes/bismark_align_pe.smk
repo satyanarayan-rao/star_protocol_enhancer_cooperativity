@@ -1,9 +1,22 @@
+rule prepare_bisulfite_genome:
+    input:
+        genome_fa = "ref_genome/dm3/dm3.fa"
+    params:
+    output:
+        ga_conversion = "ref_genome/dm3/Bisulfite_Genome/GA_conversion/genome_mfa.GA_conversion.fa", 
+        ct_conversion = "ref_genome/dm3/Bisulfite_Genome/CT_conversion/genome_mfa.CT_conversion.fa"
+    shell:
+        "bismark_genome_preparation --bowtie2 --verbose ref_genome/dm3/"
+ 
 rule bismark_align_pe:
     input:
         read1 = "trimmed/{sample}_R1_val_1.fq.gz", 
-        read2 = "trimmed/{sample}_R2_val_2.fq.gz"
+        read2 = "trimmed/{sample}_R2_val_2.fq.gz",
+        ga_conversion = "ref_genome/dm3/Bisulfite_Genome/GA_conversion/genome_mfa.GA_conversion.fa", 
+        ct_conversion = "ref_genome/dm3/Bisulfite_Genome/CT_conversion/genome_mfa.CT_conversion.fa"
+        
     params:
-        genome = "/beevol/home/satyanarr/workplace/data/ucsc/dm/dm3/", 
+        genome = "ref_genome/dm3/", 
         out_dir = "bismark_mapped",
         extra = "--gzip --no_dovetail -p 4",
         basename = lambda wildcards: "--basename {b}".format(b = wildcards.sample)
