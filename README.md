@@ -16,6 +16,9 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_2.fastq.gz
 ```
 
+## Download reference genome
+The reference genome fasta file can be downloaded from [here](https://hgdownload.cse.ucsc.edu/goldenPath/dm3/bigZips/dm3.fa.gz). Place this fasta file in the `ref_genome/dm3` directory.
+
 ## To reproduce figure 5C,D
 
 
