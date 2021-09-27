@@ -27,3 +27,14 @@ rule extend_dsmf_reads_for_cobinding_analysis:
         " {input.footprint_dict} {input.regions_metadata} {wildcards.lf}"
         " {wildcards.rf} {wildcards.lextend} {wildcards.rextend}"
         " {output.extended_fragments} {output.verbose}" 
+rule extend_bedpe_for_cobinding:
+    input:
+        fragments_covering_flank = "fragments_spanning_flanks/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}.bedpe.gz"
+    params:
+    output:
+        extended_fragments = "extended_dsmf_reads_bedpe/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}.bedpe.gz", 
+        verbose = "extended_dsmf_reads_bedpe/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_verbose.bedpe.gz"
+    shell:
+        "sh scripts/extend_fragments_for_cobinding_bedpe.sh {input.fragments_covering_flank}"
+        " {wildcards.lf} {wildcards.rf} {wildcards.lextend} {wildcards.rextend}"
+        " {output.extended_fragments} {output.verbose}" 

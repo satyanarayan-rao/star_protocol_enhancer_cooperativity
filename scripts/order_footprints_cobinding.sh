@@ -35,18 +35,18 @@ awk '{print $1"\t"$3}' ${2}.fp_and_mvec.83.tsv > ${2}.length_ordered_mvec.83.tsv
 
 # Now find out what are the unique category we have by merging ${2}.fp_and_mvec.99.tsv and ${2}.fp_and_mvec.83.tsv and looking at the number after `#`
 
-cat ${2}.fp_and_mvec.99.tsv ${2}.fp_and_mvec.83.tsv | awk -F'[#\t]' '{print $2}' | sort | uniq > ${2}.states.tsv 
+cat ${2}.fp_and_mvec.99.tsv ${2}.fp_and_mvec.83.tsv | awk -F'[#\t]' '{print $2}' | sort -n | uniq > ${2}.states.tsv 
 
 for i in `cat ${2}.states.tsv`
 do
-    grep "#${i}" ${2}.length_ordered_fp.83.tsv 
-    grep "#${i}" ${2}.length_ordered_fp.99.tsv 
+    cat ${2}.length_ordered_fp.83.tsv | python scripts/select_by_id.py ${i} 
+    cat ${2}.length_ordered_fp.99.tsv | python scripts/select_by_id.py ${i}
 done > ${2}.before_numeric.tsv
 
 for i in `cat ${2}.states.tsv`
 do
-    grep "#${i}" ${2}.length_ordered_mvec.83.tsv 
-    grep "#${i}" ${2}.length_ordered_mvec.99.tsv 
+    cat ${2}.length_ordered_mvec.83.tsv | python scripts/select_by_id.py ${i}
+    cat ${2}.length_ordered_mvec.99.tsv | python scripts/select_by_id.py ${i}
 done > ${3}.before_numeric.tsv # note the change from 2 to 3
 
 python scripts/footprint_dot_to_digit_vec.py ${2}.before_numeric.tsv $2

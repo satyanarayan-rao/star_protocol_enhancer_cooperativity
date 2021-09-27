@@ -28,3 +28,17 @@ rule occluded_edges_on_fragments:
     shell:
         "zcat {input.fragments_covering_flank} | python scripts/identify_occluded_edges.py"
         " {output.occluded_edges} {output.occluded_pkl}"  
+
+######### Mapping fragments to bedpe - useful for independent visualization #############
+
+rule map_fragments_to_flanked_bedpe:
+    input:
+        overlapping_or_adjacent = "footprints_on_fragments/{sample}_with_wobble_1_min_fp_10.bed.gz",
+        regions_bed = "input_bed/{bed}.bedpe"
+    params:
+    output:
+        fragments_covering_flank = "fragments_spanning_flanks/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}.bedpe.gz"
+    shell:
+        "sh scripts/intersect_fragments_to_loci_bedpe.sh {input.overlapping_or_adjacent}"
+        " {input.regions_bed} {output.fragments_covering_flank} {wildcards.lf} {wildcards.rf}" 
+

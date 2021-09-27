@@ -11,7 +11,7 @@ log = snakemake.log_fmt_shell()
 
 # Check if input length is 2
 n = len(snakemake.input)
-assert n == 2, "Input must have two files. Got: %r. " % n
+#assert n == 2, "Input must have two files. Got: %r. " % n
 
 shell(
     "(bismark"

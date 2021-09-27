@@ -15,3 +15,20 @@ rule assign_cobinding_states:
         " {wildcards.lf} {wildcards.rf} {wildcards.lextend} {wildcards.rextend}"  
         " {output.fragments_with_assigned_state} {output.fragments_with_assigned_state_verbose}" 
         " {output.fragments_with_assigned_state_verbose_150bp}"
+
+
+rule assign_cobinding_bedpe:
+    input:
+        extended_fragments = "extended_dsmf_reads_bedpe/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}.bedpe.gz", 
+        verbose = "extended_dsmf_reads_bedpe/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_verbose.bedpe.gz"
+    params:
+    output:
+        fragments_with_assigned_state = "cobinding_states_bedpe/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_cobound_states.bedpe.gz", 
+        fragments_with_assigned_state_verbose = "cobinding_states_bedpe/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_cobound_states_verbose.bedpe.gz", 
+        fragments_with_assigned_state_verbose_150bp = "cobinding_states_bedpe/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_cobound_states_verbose_150bp.bedpe.gz", 
+    shell:
+        "sh scripts/assign_cobinding_states.sh"
+        " {input.extended_fragments} {input.verbose}"
+        " {wildcards.lf} {wildcards.rf} {wildcards.lextend} {wildcards.rextend}"  
+        " {output.fragments_with_assigned_state} {output.fragments_with_assigned_state_verbose}" 
+        " {output.fragments_with_assigned_state_verbose_150bp}"
