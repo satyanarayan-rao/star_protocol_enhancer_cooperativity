@@ -53,11 +53,25 @@ rule order_fragments_cobinding_bedpe:
         " {input.fragments_with_assigned_state_verbose_150bp} {output.ordered_footprints}" 
         " {output.ordered_methylation} {wildcards.roi_id}"
 
+rule get_mnase_signal_bedpe:
+    input:
+        bw = lambda wildcards: config["bigwigs"][wildcards.bw_data],
+        bed = "input_bed/{bed}.bedpe"
+    params:
+        strand_col = 9
+    output:
+        signal = "mnase_signal_bedpe/{bw_data}_mapped_to_{bed}.tsv.gz",
+        eom = "mnase_signal_bedpe/{bw_data}_mapped_to_{bed}_eom.tsv.gz"
+    shell:
+        "python scripts/map_bw_to_bed_strand_aware.py {input.bw} {input.bed}"
+        " {output.signal} {output.eom} {params.strand_col}"
+ 
+
 rule plot_cobinding_footprints_bedpe:
     input:
         ordered_footprints = "fragments_ordered_cobinding_bedpe/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_roi_{roi_id}.ordered_fp.tsv",  
         ordered_methylation = "fragments_ordered_cobinding_bedpe/{sample}_to_{bed}_lf_{lf}_rf_{rf}_extended_left_{lextend}_right_{rextend}_roi_{roi_id}.ordered_methylation.tsv",
-        mnase_data = "mnase_peaks/peak_229.tsv",
+        mnase_data = "mnase_signal_bedpe/mnase_short_mapped_to_{bed}_eom.tsv.gz",
         gnuplt_mnase_params = "utils/gnuplot_base_files/mnase_params.gplt",
         gnuplt_footprint_params = "utils/gnuplot_base_files/footprint_params.gplt",
         gnuplt_methylation_params = "utils/gnuplot_base_files/methylation_params.gplt", 
@@ -82,6 +96,7 @@ rule plot_cobinding_footprints_bedpe:
         " {params.modified_lextend} {params.modified_rextend}"
         " {wildcards.lf} {wildcards.rf}"
         " {input.gnuplt_methylation_params}"
-        " {output.footprint_mat} {output.methylation_mat}"    
+        " {output.footprint_mat} {output.methylation_mat}"
+        " {wildcards.roi_id}"
 
 

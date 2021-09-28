@@ -15,3 +15,5 @@ process_footprints:
     wobble_1_min_fp_10:
         wobble_gap: 1 
         min_fp_len: 10 
+bigwigs:
+    mnase_short: "bigwigs/mnase/sm.sub.comb_50_c.bigwig"

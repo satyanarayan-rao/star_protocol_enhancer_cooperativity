@@ -8,15 +8,14 @@
 # $7 : methylation pdf   
 # $8 : footprint gplt
 # $9 : methylation gplt
-# $10 : lexetend
-# $11 : rextend 
-# $12 : lflank
-# $13 : rflank 
-# $14 : methylation params gplt
-# $15 : footprint matrix
-# $16 : methylation matrix
-# $17 : footprint eps 
-# $18 : methylation eps
+# ${10} : lexetend
+# ${11} : rextend 
+# ${12} : lflank
+# ${13} : rflank 
+# ${14} : methylation params gplt
+# ${15} : footprint matrix
+# ${16} : methylation matrix
+# ${17} : roi_id
 
 awk '{$1=""; print $0}' $1 > ${15}
 awk '{$1=""; print $0}' $2 > ${16}
@@ -26,6 +25,8 @@ awk -F '[\t#]' '{print $2}' $1 | sort -n | uniq -c > ${1}.lc.tsv
 
 left_coor=`expr -${10} - 50`
 label_coor=`expr -${10} - 10`
+### prepare_mnase data
+zcat $3 | grep -w "${17}" | cut -f2- | tr '\t' '\n' | awk '{print NR-1000"\t"$1}'   > ${15}.mnase.tsv
 
 ############  footprint gnuplot ############### 
 cat << EOT > $8 
@@ -47,7 +48,8 @@ set output '${6%.pdf}.eps'
 #set output '${6}'
 #set output '${15}'
 set multiplot layout 12, 1
-plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle
+#plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle
+plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2  notitle
 load '${5}'
 set yra [${tot_lines} : 0 ] 
 EOT
@@ -92,7 +94,8 @@ set output '${7%.pdf}.eps'
 #set output '${7}'
 #set output '${16}'
 set multiplot layout 12, 1
-plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle 
+#plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle 
+plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2  notitle 
 load '${14}'
 set yra [$tot_lines: 0 ]
 EOT
