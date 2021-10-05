@@ -17,11 +17,11 @@
 # ${16} : methylation matrix
 # ${17} : roi_id
 
-awk '{$1=""; print $0}' $1 > ${15}
-awk '{$1=""; print $0}' $2 > ${16}
-tot_lines=`wc -l ${1} | awk '{print $1}'`
+cat $1 | python scripts/select_valid_states.py 3 | awk '{$1=""; print $0}' > ${15}
+cat $2 | python scripts/select_valid_states.py 3 | awk '{$1=""; print $0}' > ${16}
+tot_lines=`wc -l ${15} | awk '{print $1}'`
 
-awk -F '[\t#]' '{print $2}' $1 | sort -n | uniq -c > ${1}.lc.tsv 
+cat $1 | python scripts/select_valid_states.py 3 | awk -F '[\t#]' '{print $2}' | sort -n | uniq -c > ${1}.lc.tsv 
 
 left_coor=`expr -${10} - 50`
 label_coor=`expr -${10} - 10`
@@ -49,7 +49,8 @@ set output '${6%.pdf}.eps'
 #set output '${15}'
 set multiplot layout 12, 1
 #plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle
-plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2  notitle
+set key font 'Arial, 10' left top 
+plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2 title 'MNase'
 load '${5}'
 set yra [${tot_lines} : 0 ] 
 EOT
@@ -57,12 +58,14 @@ EOT
 c=1
 s=0
 prev_val=0
+echo "set arrow 20  from ${left_coor}, 0 to ${11}, 0 front lc rgb '#636363' lw 2 nohead" >> $8
 while read cnt cl 
 do
+    state_lab=`python scripts/get_state_label_at_a_single_site.py ${cl}`
     s=`expr $s + $cnt`
     mid_point=`echo "($s + ${prev_val})/2" | bc`
     echo "set arrow $c from ${left_coor} , $s to ${11}, $s front lc rgb '#636363' lw 2 nohead" >> $8
-    echo "set label $c 'n = $cnt' at ${label_coor}, ${mid_point} right front" >> $8
+    echo "set label $c 'n = $cnt (${state_lab})' at ${label_coor}, ${mid_point} right front font 'Arial, 10'" >> $8
     c=`expr $c + 1` 
     prev_val=$s
 done < ${1}.lc.tsv
@@ -94,20 +97,24 @@ set output '${7%.pdf}.eps'
 #set output '${7}'
 #set output '${16}'
 set multiplot layout 12, 1
+set key font 'Arial, 10' left top 
 #plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle 
-plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2  notitle 
+plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2  title 'MNase'
 load '${14}'
 set yra [$tot_lines: 0 ]
 EOT
 c=1
 s=0
 prev_val=0
+
+echo "set arrow 20  from ${left_coor}, 0 to ${11}, 0 front lc rgb '#636363' lw 2 nohead" >> $9
 while read cnt cl 
 do
+    state_lab=`python scripts/get_state_label_at_a_single_site.py ${cl}`
     s=`expr $s + $cnt`
     mid_point=`echo "($s + ${prev_val})/2" | bc`
     echo "set arrow $c from ${left_coor}, $s to ${11}, $s front lc rgb '#636363' lw 2 nohead" >> $9
-    echo "set label $c 'n = $cnt' at ${label_coor}, ${mid_point} right front" >> $9
+    echo "set label $c 'n = $cnt (${state_lab})' at ${label_coor}, ${mid_point} right front font 'Arial, 10'" >> $9
     c=`expr $c + 1` 
     prev_val=$s
 done < ${1}.lc.tsv

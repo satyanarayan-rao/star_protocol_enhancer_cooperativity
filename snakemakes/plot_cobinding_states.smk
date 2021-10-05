@@ -75,6 +75,7 @@ rule plot_cobinding_footprints_bedpe:
         gnuplt_mnase_params = "utils/gnuplot_base_files/mnase_params.gplt",
         gnuplt_footprint_params = "utils/gnuplot_base_files/footprint_params.gplt",
         gnuplt_methylation_params = "utils/gnuplot_base_files/methylation_params.gplt", 
+        input_bed = "input_bed/{bed}.bedpe"
     params:
         modified_lextend = lambda wildcards: str(int(wildcards.lextend) - 150),
         modified_rextend = lambda wildcards: str(int(wildcards.rextend) - 150),
@@ -97,6 +98,6 @@ rule plot_cobinding_footprints_bedpe:
         " {wildcards.lf} {wildcards.rf}"
         " {input.gnuplt_methylation_params}"
         " {output.footprint_mat} {output.methylation_mat}"
-        " {wildcards.roi_id}"
+        " {wildcards.roi_id} {input.input_bed}"
 
 
