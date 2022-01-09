@@ -15,7 +15,7 @@ git clone https://github.com/satyanarayan-rao/star_protocol_enhancer_cooperativi
 
 **Method 2** 
 
-Please visit the github repository [here](https://github.com/satyanarayan-rao/star_protocol_enhancer_cooperativity). Please click on the code and choose "Download as Zip" option as shown in the image below.
+Please visit the github repository [here](https://github.com/satyanarayan-rao/star_protocol_enhancer_cooperativity). Please click on the code and choose "Download Zip" option as shown in the image below.
 
 ![alt text](metadata/download_instructions.png) 
 
@@ -23,9 +23,11 @@ Please visit the github repository [here](https://github.com/satyanarayan-rao/st
 
 This pipeline is Linux/Unix-based system compatible. 
 
-It is highly recommended to use Anaconda Open Source Distribution. Please follow the steps below to build right environment to run the pipeline. 
+Please install Anaconda ((Individual Edition)[https://www.anaconda.com/products/individual]) first. 
 
-- Create an environment "dsmf_viz" using the command: `conda create -n dsmf_viz python=3.6`
+Please follow the steps below to build right environment to run the pipeline. 
+
+- Create an environment `dsmf_viz` using the command: `conda create -n dsmf_viz python=3.6`
 - Activate this this environment using command `source activate dsmf_viz` 
 - Run `install_required_packages.sh` to install required packages mentioned below:
     - Bowtie2
