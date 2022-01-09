@@ -4,7 +4,7 @@ This protocol is derived from [Rao et al., 2021](https://pubmed.ncbi.nlm.nih.gov
 
 ## Before you begin
 
-### Downloading the pipeline
+### Download the pipeline
 
 **Method 1:**
 
@@ -19,7 +19,7 @@ Please visit the github repository [here](https://github.com/satyanarayan-rao/st
 
 ![alt text](metadata/download_instructions.png) 
 
-### Installing reuqired softwares
+### Install reuqired softwares
 
 This pipeline is Linux/Unix-based system compatible. 
 
@@ -37,8 +37,8 @@ Please follow the steps below to build right environment to run the pipeline.
     - Bedtools
     - Samtools
     - pyBigWig
-    - pandas
-    - numpy
+    - Pandas
+    - Numpy
 
 
 Data for demo is included in this github repository, but to visualize at your
@@ -55,8 +55,20 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_2.fastq.gz
 ```
 
-## Download reference genome
-The reference genome fasta file can be downloaded from [here](https://hgdownload.cse.ucsc.edu/goldenPath/dm3/bigZips/dm3.fa.gz). Place this fasta file in the `ref_genome/dm3` directory.
+### Download reference genome
+The reference genome fasta file can be downloaded from [here](https://hgdownload.cse.ucsc.edu/goldenPath/dm3/bigZips/dm3.fa.gz). Place this fasta file in the `ref_genome/dm3` directory, and unzip it using the following command
+
+```
+$ gunzip dm3.fa.gz 
+```
+
+## Run the pipeline
+
+### On MacOS machines
+
+
+
+### On Linux-based machines
 
 ## To reproduce figure 5C,D
 

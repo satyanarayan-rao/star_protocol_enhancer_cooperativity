@@ -16,6 +16,11 @@ ncols=`head -1 $2 | awk -F'\t' '{print NF}'`
 
 awk '{print $1"\t"$2-left"\t"$6+right"\t"$0}' left=$4 right=$5 $2 | sort -k1,1 -k2,2n -k3,3n | bedtools intersect -a - -b $1 -wa -wb -f 1 -sorted | gzip - >  ${2}.intersect.bed.gz
 added_cols=`echo "$ncols + 3" | bc`
-zcat ${2}.intersect.bed.gz | python scripts/compress_bedpe_fields.py $added_cols |  python scripts/add_edges_to_footprints_bedpe.py 8 | gzip - > $3 
+
+if [[ $OSTYPE == 'darwin'* ]]; then 
+    gzcat ${2}.intersect.bed.gz | python scripts/compress_bedpe_fields.py $added_cols |  python scripts/add_edges_to_footprints_bedpe.py 8 | gzip - > $3 
+else
+    zcat ${2}.intersect.bed.gz | python scripts/compress_bedpe_fields.py $added_cols |  python scripts/add_edges_to_footprints_bedpe.py 8 | gzip - > $3 
+fi 
 
 # cleanup 

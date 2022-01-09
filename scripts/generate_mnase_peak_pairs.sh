@@ -13,8 +13,11 @@ awk '$5=="open"' $1 | sort -k1,1  -k2,2n -k3,3n  > ${1}.peaks_in_open_enh.bed
 python scripts/get_all_mnase_peak_pair_bed.py ${1}.peaks_in_open_enh.bed 30 > ${1}.all_peak_pairs.tsv
 
 bedtools slop -b $5 -g $3 -i ${1}.all_peak_pairs.tsv > ${1}.all_peak_pairs.${5}.bed
-
-zcat $2 | cut -f7- | sort -S4G | uniq | sort -S4G --parallel=4 -k1,1 -k2,2n -k3,3n  > ${2}.dsmf.bed 
+if [[ $OSTYPE == 'darwin'* ]]; then
+    gzcat $2 | cut -f7- | sort -S4G | uniq | sort -S4G --parallel=4 -k1,1 -k2,2n -k3,3n  > ${2}.dsmf.bed 
+else
+    zcat $2 | cut -f7- | sort -S4G | uniq | sort -S4G --parallel=4 -k1,1 -k2,2n -k3,3n  > ${2}.dsmf.bed 
+fi
 bedtools intersect -a ${1}.all_peak_pairs.${5}.bed -b ${2}.dsmf.bed -wa -wb -f 1 -sorted > ${7%.gz} 
 
 python scripts/count_intersected_reads_per_peak_unique.py ${7%.gz} > ${6}.dsmf_counts.tsv 

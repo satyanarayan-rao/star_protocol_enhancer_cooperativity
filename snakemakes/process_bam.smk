@@ -12,7 +12,6 @@ rule overlapping_or_adjacent_reads:
     output:
         overlapping_or_adjacent = "overlapping_or_adjacent_fragments/{sample}_overlapping_or_adjacent.bed.gz"
     shell:
-        "zcat {input.read_level_methylation_status}"
-        " | egrep \"_overlapping|_adjacent\" "
-        " | sort --parallel=8 -k1,1 -k2,2n -k3,3n |  gzip - > {output.overlapping_or_adjacent}"
+        "sh scripts/overlapping_or_adjacent_reads.sh {input.read_level_methylation_status}"
+        " {output.overlapping_or_adjacent}"
 

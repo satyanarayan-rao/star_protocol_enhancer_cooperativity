@@ -5,8 +5,8 @@ rule build_fooptrint_dict:
     output:
         footprint_dict = "fragments_spanning_flanks/{sample}_to_{bed}_spanning_lf_{lf}_rf_{rf}.pkl"
     shell:
-        "zcat {input.fragments_covering_flank}"
-        " | python scripts/build_footprint_dict.py {output.footprint_dict}"
+        "sh scripts/build_footprint_dict.sh {input.fragments_covering_flank}" 
+        " {output.footprint_dict}"
  
 
 rule build_footprint_matrix:
@@ -28,7 +28,7 @@ rule build_footprint_matrix:
         footprint_length_at_bp_resolution_tsv = \
               "flank_footprint_matrix/{sample}_to_{bed}_lf_{lf}_rf_{rf}_methylation_matrix.footprint_len.bp.res.tsv"        
     shell: 
-        "zcat {input.fragments_covering_flank} | python scripts/build_flank_methylation_matrix.py"
+        "sh scripts/build_footprint_matrix.sh {input.fragments_covering_flank}"
         " {wildcards.lf} {wildcards.rf} {output.methylation_matrix}"
         " {output.methylation_matrix_real_footprint_len_pkl}"
         " {output.methylation_matrix_footprint_vec_pkl}"

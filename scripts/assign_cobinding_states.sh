@@ -9,8 +9,13 @@
 # $8 : output verbose file with binding states: bedgz
 # $9 : output verbose file with binding states spanning 150 bp from the primary peak
 
-zcat $2  > ${2%.gz}
-zcat $1 | python scripts/assign_cobinding_states.py ${2%.gz} ${3} ${4} ${5} ${6} ${7%.gz} ${8%.gz} ${9%.gz}
+if [[ $OSTYPE == 'darwin'* ]]; then
+    gzcat $2  > ${2%.gz}
+    gzcat $1 | python scripts/assign_cobinding_states.py ${2%.gz} ${3} ${4} ${5} ${6} ${7%.gz} ${8%.gz} ${9%.gz}
+else
+    zcat $2  > ${2%.gz}
+    zcat $1 | python scripts/assign_cobinding_states.py ${2%.gz} ${3} ${4} ${5} ${6} ${7%.gz} ${8%.gz} ${9%.gz}
+fi 
 
 cat ${7%.gz} | gzip - > $7
 cat ${8%.gz} | gzip - > $8

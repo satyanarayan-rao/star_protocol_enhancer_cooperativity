@@ -7,7 +7,6 @@ rule define_footprints:
     output:
         footprints_on_fragments = "footprints_on_fragments/{sample}_with_{setting}.bed.gz",
     shell:
-        "zcat {input.overlapping_or_adjacent} | python scripts/call_footprints.py"
-        " | python scripts/fix_wobble.py {params.wobble_gap}"
-        " | python scripts/keep_all_footprint_ge_th.py {params.min_fp_len}" 
-        " | gzip - > {output.footprints_on_fragments}" 
+        "sh scripts/define_footprints.sh {input.overlapping_or_adjacent}"
+        " {params.wobble_gap} {params.min_fp_len}"
+        " {output.footprints_on_fragments}"

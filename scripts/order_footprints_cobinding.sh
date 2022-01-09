@@ -7,7 +7,11 @@
 
 ## Here are all the steps to get to footprint vector ## Here are all the steps to get to footprint 
 roi_id=$4
-zcat $1 | grep ${roi_id} > ${2}.tmp.tsv
+if [[ $OSTYPE == 'darwin'* ]]; then
+    gzcat $1 | grep ${roi_id} > ${2}.tmp.tsv
+else
+    zcat $1 | grep ${roi_id} > ${2}.tmp.tsv
+fi
 cat ${2}.tmp.tsv | awk 'NR%3==1' | grep "99~147" > ${2}.fp.99.tsv 
 cat ${2}.tmp.tsv | awk 'NR%3==1' | grep "83~163" > ${2}.fp.83.tsv 
 cat ${2}.tmp.tsv | awk 'NR%3==2' | grep "99~147" > ${3}.mvec.99.tsv 

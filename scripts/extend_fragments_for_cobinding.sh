@@ -10,7 +10,11 @@
 # $9 : verbose bedgz 
 
 echo "zcat $1 | python scripts/extend_fragments_for_cobinding.py ${2} ${3} ${4} ${5} ${6} ${7} ${8%.gz} ${9%.gz}"
-zcat $1 | python scripts/extend_fragments_for_cobinding.py ${2} ${3} ${4} ${5} ${6} ${7} ${8%.gz} ${9%.gz} 
+if [[ $OSTYPE == 'darwin'* ]]; then
+    gzcat $1 | python scripts/extend_fragments_for_cobinding.py ${2} ${3} ${4} ${5} ${6} ${7} ${8%.gz} ${9%.gz} 
+else
+    zcat $1 | python scripts/extend_fragments_for_cobinding.py ${2} ${3} ${4} ${5} ${6} ${7} ${8%.gz} ${9%.gz} 
+fi
 cat ${8%.gz} | gzip - > $8 
 cat ${9%.gz} | gzip - > $9  
 
