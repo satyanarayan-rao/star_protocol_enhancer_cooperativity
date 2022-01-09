@@ -4,6 +4,41 @@ This protocol is derived from [Rao et al., 2021](https://pubmed.ncbi.nlm.nih.gov
 
 ## Before you begin
 
+### Downloading the pipeline
+
+**Method 1:**
+
+If `git` command is available on the machine you want to run the pipeline, it can simply be downlaod using the following command:
+```
+git clone https://github.com/satyanarayan-rao/star_protocol_enhancer_cooperativity.git
+```
+
+**Method 2** 
+
+Please visit the github repository [here](https://github.com/satyanarayan-rao/star_protocol_enhancer_cooperativity). Please click on the code and choose "Download as Zip" option as shown in the image below.
+
+![alt text](metadata/download_instructions.png) 
+
+### Installing reuqired softwares
+
+This pipeline is Linux/Unix-based system compatible. 
+
+It is highly recommended to use Anaconda Open Source Distribution. Please follow the steps below to build right environment to run the pipeline. 
+
+- Create an environment "dsmf_viz" using the command: `conda create -n dsmf_viz python=3.6`
+- Activate this this environment using command `source activate dsmf_viz` 
+- Run `install_required_packages.sh` to install required packages mentioned below:
+    - Bowtie2
+    - Bismark
+    - Trim Galore
+    - Snakemake
+    - Bedtools
+    - Samtools
+    - pyBigWig
+    - pandas
+    - numpy
+
+
 Data for demo is included in this github repository, but to visualize at your
 sites of interest, please download the sequencing data, and keep them in
 `data_from_geo/`. Here is the list of URLs for the sequencing data. 
