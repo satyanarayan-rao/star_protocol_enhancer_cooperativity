@@ -23,7 +23,7 @@ Please visit the github repository [here](https://github.com/satyanarayan-rao/st
 
 This pipeline is Linux/Unix-based system compatible. 
 
-Please install Anaconda ((Individual Edition)[https://www.anaconda.com/products/individual]) first. 
+Please install Anaconda [Individual Edition](https://www.anaconda.com/products/individual) first. 
 
 Please follow the steps below to build right environment to run the pipeline. 
 
