@@ -1,3 +1,4 @@
+#!/bin/bash
 # first collect reads from all footprint tsv files
 find ./fragments_ordered_single_binding/ -name "*fp.tsv" | xargs -i cat {} | awk -F'`' '{print $2}' | awk -F'_' '{print "@"$1}' > tmp/single.tsv
 find ./fragments_ordered_cobinding_bedpe/ ./fragments_ordered_cobinding/ -name "*fp.tsv" | xargs -i cat {} | awk -F'`' '{print $9}' | awk -F'_' '{print "@"$1}' > tmp/cobinding.tsv

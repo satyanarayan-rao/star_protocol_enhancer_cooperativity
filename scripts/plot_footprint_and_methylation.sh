@@ -26,7 +26,11 @@ cat $1 | python scripts/select_valid_states.py 3 | awk -F '[\t#]' '{print $2}' |
 left_coor=`expr -${10} - 50`
 label_coor=`expr -${10} - 10`
 ### prepare_mnase data
-zcat $3 | grep -w "${17}" | cut -f2- | tr '\t' '\n' | awk '{print NR-1000"\t"$1}'   > ${15}.mnase.tsv
+if [[ $OSTYPE == 'darwin'* ]]; then
+    gzcat $3 | grep -w "${17}" | cut -f2- | tr '\t' '\n' | awk '{print NR-1000"\t"$1}'   > ${15}.mnase.tsv
+else
+    zcat $3 | grep -w "${17}" | cut -f2- | tr '\t' '\n' | awk '{print NR-1000"\t"$1}'   > ${15}.mnase.tsv
+fi
 
 ############  footprint gnuplot ############### 
 cat << EOT > $8 

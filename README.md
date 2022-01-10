@@ -56,21 +56,16 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_2.fastq.gz
 ```
 
 ### Download reference genome
-The reference genome fasta file can be downloaded from [here](https://hgdownload.cse.ucsc.edu/goldenPath/dm3/bigZips/dm3.fa.gz). Place this fasta file in the `ref_genome/dm3` directory, and unzip it using the following command
 
+Please run the following command to download `dm3` reference genome. 
 ```
-$ gunzip dm3.fa.gz 
+$ sh downlaod_reference_genome.sh 
 ```
 
 ## Run the pipeline
 
-### On MacOS machines
 
-
-
-### On Linux-based machines
-
-## To reproduce figure 5C,D
+### To reproduce panels of Figure1 in the STAR protocol manuscript
 
 Please run the following single command. 
 
@@ -79,7 +74,7 @@ snakemake --snakefile cooperative_binding_analysis.smk plots/single_binding/supp
 ```
 
 
-## To reproduce figure 6C
+## To reproduce panels of Figure2 in the STAR protocol manuscript
 ```
 snakemake  --snakefile cooperative_binding_analysis.smk plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.fp.pdf plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.methylation.pdf --configfile configs/config.yaml
 ```
