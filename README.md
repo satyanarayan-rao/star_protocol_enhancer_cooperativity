@@ -41,6 +41,12 @@ Please follow the steps below to build right environment to run the pipeline.
     - Numpy
 
 
+### Download reference genome and dSMF data
+
+Please run the following command to download `dm3` reference genome. 
+```
+$ sh downlaod_reference_genome.sh 
+```
 Data for demo is included in this github repository, but to visualize at your
 sites of interest, please download the sequencing data, and keep them in
 `data_from_geo/`. Here is the list of URLs for the sequencing data. 
@@ -55,12 +61,6 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_2.fastq.gz
 ```
 
-### Download reference genome
-
-Please run the following command to download `dm3` reference genome. 
-```
-$ sh downlaod_reference_genome.sh 
-```
 
 ## Run the pipeline
 
