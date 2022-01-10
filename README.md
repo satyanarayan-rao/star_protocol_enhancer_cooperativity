@@ -74,7 +74,7 @@ snakemake --snakefile cooperative_binding_analysis.smk plots/single_binding/supp
 ```
 
 
-## To reproduce panels of Figure2 in the STAR protocol manuscript
+### To reproduce panels of Figure2 in the STAR protocol manuscript
 ```
 snakemake  --snakefile cooperative_binding_analysis.smk plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.fp.pdf plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.methylation.pdf --configfile configs/config.yaml
 ```
