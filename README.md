@@ -61,6 +61,28 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/009/SRR3133329/SRR3133329_2.fastq.gz
 ```
 
+## Directory structure
+
+- `configs/`: contains configuration file for the pipeline. Please see the exmaple `demo_S2` in `configs/config.yaml` to add your own sample information. `configs/cluster.json` contains information for submitting jobs on cluster. Plese contact your cluster system administrator to configure this json file accordingly. 
+
+- `input_bed/`: Here user should keep regions of interest in a bed file. Please look at `input_bed/example.bed` for mapping binding at single sites, and see `input_bed/example_cobinding.bedpe` for mapping binding at pair of sites. 
+
+- `data_from_geo/`: This directory contains raw sequencing reads
+
+- `ref_genome/`: This directory contains reference genome of your interest
+
+- `metadata/`: This directory contains meta information, for example, genome size file, `metadata/dm3.chrom.sizes`. Please use **appropriate genome size** correspoding to the reference genome! 
+
+- `plots/`: Contains subdirectories with output pdf visualizing footprints and methylation maps
+
+- `utils/gnuplot_base_files/`: Contains gnuplot commands in files that are used while plotting
+
+- `scripts/`: Contains required scripts to run the pipeline
+
+- `snakemakes/`: Contains modularized snakemake files. File names are self-explanatory
+
+- `workflow_figures/`: Contains snakemake workflow image. Names of rules in the image can be traced in the snakemake files
+
 
 ## Run the pipeline
 
