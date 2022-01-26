@@ -19,7 +19,7 @@ Please visit the github repository [here](https://github.com/satyanarayan-rao/st
 
 ![alt text](metadata/download_instructions.png) 
 
-### Install reuqired softwares
+### Install required softwares
 
 This pipeline is Linux/Unix-based system compatible. 
 
