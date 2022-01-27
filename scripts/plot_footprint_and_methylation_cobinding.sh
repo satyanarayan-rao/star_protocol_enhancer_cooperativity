@@ -115,7 +115,7 @@ set multiplot layout 12, 1
 #plot '${3}' u 1:2 w l lc rgb "#31a354" lw 2  notitle 
 set key font 'Arial, 10' left top
 plot '${15}.mnase.tsv' u 1:2 w l lc rgb "#31a354" lw 2  title 'MNase'
-plot '${15}.mnase.tsv' u 1:2 with filledcurve notitle 
+#plot '${15}.mnase.tsv' u 1:2 with filledcurve notitle 
 load '${14}'
 set yra [$tot_lines: 0 ]
 EOT
