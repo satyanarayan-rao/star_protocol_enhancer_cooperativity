@@ -45,7 +45,7 @@ Please follow the steps below to build right environment to run the pipeline.
 
 Please run the following command to download `dm3` reference genome. 
 ```
-$ sh downlaod_reference_genome.sh 
+$ sh download_reference_genome.sh
 ```
 Data for demo is included in this github repository, but to visualize at your
 sites of interest, please download the sequencing data, and keep them in
