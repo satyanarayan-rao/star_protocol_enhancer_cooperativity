@@ -100,3 +100,38 @@ snakemake --snakefile cooperative_binding_analysis.smk plots/single_binding/supp
 ```
 snakemake  --snakefile cooperative_binding_analysis.smk plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.fp.pdf plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.methylation.pdf --configfile configs/config.yaml
 ```
+
+
+## Interpreting file names:
+
+The advantage of Snakemake is that a user can incorporate parameters in file names. Related to this, below I expand on parameters placed in the output file names:
+
+### For a single binding site example
+
+File name: `plots/single_binding/suppressed_merged_demo_S2_to_example_spanning_lf_15_rf_15_extended_left_150_right_150_roi_peak_229.fp.pdf` 
+
+- `demo_S2`: points to the samples. Please take a look at samples starting with
+`demo_S2` in `data_from_geo/samples.tsv` and also look at `bam_merge_config` ->
+`demo_S2` in `configs/config.yaml` file
+
+- `example`: points to `input_bed/example.bed` 
+
+- `15`: span 15bp from the ROI center; `lf` means span left, and `rf` means span right. This parameter is used in defining TF footprint. 
+
+- `150`: span 150 bp from ROI center. This is for visualization purpose. A dSMF molecule in principle could be as long as 300 bp, thus spanning 150 bp left and right respectively. 
+
+- `peak_229`: Name of the ROI. This name can be found as the fourth column in `input_bed/example.bed` 
+
+### For a pair of binding sites example
+
+File name: `plots/cobinding_bedpe/suppressed_merged_demo_S2_to_example_cobinding_lf_15_rf_15_extended_left_300_right_300_roi_peak_110_4_and_peak_110_6.fp.pdf` 
+
+- `demo_S2`: Same as above 
+
+- `example_cobinding`: points to `input_bed/example_cobinding.bedpe` ; **CRITICAL**: the file name should have `.bedpe` extension and should follow `bedpe` format. 
+
+- `15`: same as above: this parameter will be used for defining TF footprints at both ROIs
+
+- `300`: span 300bp from the left ROI (Chromosom location of ROI<sub>left</sub> < ROI<sub>right</sub>)
+
+- `peak_110_4_and_peak_110_6`: `name_of_left_ROI`_and_`name_of_right_ROI`; this name can be found in `input_bed/example_cobinding.bedpe`
