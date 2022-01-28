@@ -36,10 +36,16 @@ Please follow the steps below to build right environment to run the pipeline.
     - Snakemake
     - Bedtools
     - Samtools
+    - Bamtools
     - pyBigWig
     - Pandas
     - Numpy
+    - Tbb
+    - Gnuplot
+    - Ghostscript
+    - Perl
 
+**CAUTION:** Please run `install_required_packages.sh` only after activating the virtual environment (`dsmf_viz`) to avoid conflicts with existing package installations
 
 ### Download reference genome and dSMF data
 
